@@ -1,5 +1,9 @@
 # UDM-Cloudflare-DDNS
 
+## Change Log
+
+- 2022-22-2 - Major Update for UDM v2.x and v3.x
+
 ## What It Does
 
 This will allow to to span a container with `podman` to handle DDNS updates for main internet IP address.  
@@ -38,35 +42,7 @@ curl -s https://raw.githubusercontent.com/fire1ce/UDM-Cloudflare-DDNS/main/insta
 
 ## Configuration
 
-Edit the configuration file located at
-
-```shell
-/mnt/data/on_boot.d/30-cloudflare-ddns.sh
-```
-
-## Parameters
-
-For detailed information on the parameters, see the [oznu/docker-cloudflare-ddns Github Page][oznu-docker-cloudflare-ddns-url]
-
-| Parameter | Description            | Example       | Type                | Required |
-| --------- | ---------------------- | ------------- | ------------------- | -------- |
-| PI_KEY    | Cloudflare API Token   | change_me     | string              | Yes      |
-| ZONE      | Cloudflare Domain      | example.com   | string              | Yes      |
-| SUBDOMAIN | Remove Proxied Records | ddns          | string              | Yes      |
-| CRON      | Pi-hole hostname/IP    | `"* * * * *"` | string(cron syntax) | Yes      |
-
-## Access DDNS Container Logs
-
-In order to check that everything is working, you can access the logs of the container using the following command:
-
-```shell
-podman logs -f cloudflare-ddns
-```
-
-## Credit
-
-Based on [oznu/docker-cloudflare-ddns][oznu-docker-cloudflare-ddns-url] by [oznu][oznu-github-page-url],
-[unifios-utilities/cloudflare-ddns][unifios-utilities-cloudflare-ddns-url]
+**will be updated soon**
 
 <!-- --- -->
 
