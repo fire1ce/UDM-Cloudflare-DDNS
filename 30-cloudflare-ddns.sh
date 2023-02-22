@@ -1,18 +1,25 @@
-#!/bin/sh
-CONTAINER=cloudflare-ddns
+#!/bin/bash
 
-# Starts a cloudflare ddns container that is deleted after it is stopped.
-# All configs stored in /mnt/data/cloudflare-ddns
-if podman container exists "$CONTAINER"; then
-  podman start "$CONTAINER"
-else
-  podman run -i -d \
-    --name "$CONTAINER" \
-    --restart=always \
-    -v /run \
-    -e API_KEY=change_me \
-    -e ZONE=example.com \
-    -e SUBDOMAIN=change_me \
-    -e CRON="* * * * *" \
-    oznu/cloudflare-ddns:latest
-fi
+# Get DataDir location
+DATA_DIR="/mnt/data"
+case "$(ubnt-device-info firmware || true)" in
+1*)
+  DATA_DIR="/mnt/data"
+  ;;
+2*)
+  DATA_DIR="/data"
+  ;;
+3*)
+  DATA_DIR="/data"
+  ;;
+*)
+  echo "ERROR: No persistent storage found." 1>&2
+  exit 1
+  ;;
+esac
+
+# Set up the cron job
+(
+  crontab -l
+  echo "* * * * * $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.sh"
+) | crontab -
