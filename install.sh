@@ -22,15 +22,21 @@ esac
 
 curl -sO https://raw.githubusercontent.com/fire1ce/DDNS-Cloudflare-Bash/main/update-cloudflare-dns.sh
 mkdir -p $DATA_DIR/cloudflare-ddns
-mv update-cloudflare-dns.sh $DATA_DIR/cloudflare-ddns
+mv update-cloudflare-dns.sh $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.sh
 chmod +x $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.sh
-curl -sO https://raw.githubusercontent.com/fire1ce/UDM-Cloudflare-DDNS/main/30-cloudflare-ddns.sh
-mv 30-cloudflare-ddns.sh $DATA_DIR/on_boot.d/30-cloudflare-ddns.sh
-chmod +x $DATA_DIR/on_boot.d/30-cloudflare-ddns.sh
 curl -sO https://raw.githubusercontent.com/fire1ce/UDM-Cloudflare-DDNS/main/update-cloudflare-dns.conf
 mv update-cloudflare-dns.conf $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.conf
 
-echo "==> 30-cloudflare-ddns.sh installed successfully"
+# Define the cron job
+cron_job="* * * * * $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.sh"
+
+# Add the cron job to the user's crontab file
+echo "==> Adding cron job to crontab"
+(
+  crontab -l
+  echo "$cron_job"
+) | crontab -
+
 echo "==> Edit configuration at $DATA_DIR/cloudflare-ddns/update-cloudflare-dns.conf"
-echo "==> Then run $DATA_DIR/on_boot.d/30-cloudflare-ddns.sh"
+echo "==> The script will run every minute, you can change this in the crontab file"
 exit 0
