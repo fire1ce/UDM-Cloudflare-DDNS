@@ -2,6 +2,7 @@
 
 # Set error mode
 set -e
+set -x
 
 # Define color codes
 RED='\e[31m'
