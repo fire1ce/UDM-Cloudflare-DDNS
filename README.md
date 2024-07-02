@@ -2,6 +2,7 @@
 
 ## Change Log
 
+- 2024-07-02 - Added support for Unifi OS v4.x
 - 2023-12-14 - Updated installation and uninstallation scripts for better user experience, flexibility, and removed support for v1.x firmware versions.
 - 2023-02-10 - Major Update for UDM v2.x and v3.x
 
