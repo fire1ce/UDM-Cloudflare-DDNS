@@ -24,7 +24,7 @@ case "$FIRMWARE_VERSION" in
   echo -e "${RED}ERROR: Firmware version 1.x is not supported by this script.${NC}" 1>&2
   exit 1
   ;;
-2* | 3*)
+2* | 3* | 4*)
   DATA_DIR="/data"
   echo -e "${GREEN}Using /data for installation.${NC}"
   ;;
